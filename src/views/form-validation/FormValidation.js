@@ -77,7 +77,7 @@ const AddUsers = () => {
       if (formData.userId) {
         // Update existing user
         const response = await axios.put(
-          `http://localhost:5000/api/addUsers/updateUser/${formData.userId}`,
+          `https://agentsapp.vercel.app/api/addUsers/updateUser/${formData.userId}`,
           payload
         );
   
@@ -89,7 +89,7 @@ const AddUsers = () => {
       } else {
         // Create new user
         const response = await axios.post(
-          'http://localhost:5000/api/addUsers/saveCreateUser',
+          'https://agentsapp.vercel.app/api/addUsers/saveCreateUser',
           payload
         );
   

@@ -28,7 +28,7 @@ const Datatables = () => {
   useEffect(() => {
     const fetchAgents = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/agents');
+        const response = await axios.get('https://agentsapp.vercel.app/api/agents');
         // Log the data structure for debugging
         console.log(response.data); // Verify that the address field exists
 
