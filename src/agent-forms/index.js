@@ -108,7 +108,7 @@ const FormAgent = () => {
       await axios.post('https://agentsapp.vercel.app/api/agents/create', payload, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
-  
+      console.log('FormData:', Array.from(payload.entries()));
       Swal.fire({
         icon: 'success',
         title: 'Success',
@@ -127,7 +127,7 @@ const FormAgent = () => {
 
   return (
     <div className="agentform">
-      <Container fluid className="h-100">
+      <Container  className="h-100">
         <Row className="justify-content-center align-items-center h-100">
           <Col lg="12" className="agentformcontainer">
             <AuthLogo />
@@ -313,6 +313,7 @@ const FormAgent = () => {
                         >
                           <option value="">--Select Country--</option>
                           <option value="India">India</option>
+                          <option value="India">US</option>
                         </Input>
                       </FormGroup>
                     </Col>
