@@ -4,57 +4,57 @@ const tableData = [
   {
     id: 1,
     name: 'Elite admin',
-    status: 'sale',
-    date: '35',
+    status: 'Active',
+    date: '11235',
     price: '$24',
   },
   {
     id: 2,
     name: 'Real Homes',
-    status: 'extended',
-    date: '35',
+    status: 'Active',
+    date: '10235',
     price: '$1250',
   },
   {
     id: 3,
     name: 'Ample Admin',
-    status: 'extended',
-    date: '35',
+    status: 'Active',
+    date: '9853',
     price: '-$24',
   },
   {
     id: 4,
     name: 'Medical Pro',
-    status: 'tax',
-    date: '35',
+    status: 'InActive',
+    date: '8125',
     price: '$24',
   },
   {
     id: 5,
     name: 'Hosting press html',
-    status: 'sale',
-    date: '35',
+    status: 'Active',
+    date: '7525',
     price: '$1250',
   },
   {
     id: 6,
     name: 'Digital Agency PSD',
-    status: 'sale',
-    date: '35',
+    status: 'Active',
+    date: '6852',
     price: '$64',
   },
   {
     id: 7,
     name: 'Helping Hands',
-    status: 'member',
-    date: '35',
+    status: 'InActive',
+    date: '5977',
     price: '-$14',
   },
   {
     id: 8,
     name: 'Ample Admin',
-    status: 'extended',
-    date: '35',
+    status: 'InActive',
+    date: '5784',
     price: '$1250',
   },
 ];
@@ -65,7 +65,7 @@ const SalesOverview = () => {
       <CardBody>
         <div className="d-flex align-items-center justify-content-between">
           <div>
-            <CardTitle tag="h4">Sales Overview</CardTitle>
+            <CardTitle tag="h4">Our Top Agents</CardTitle>
           </div>
           <div className="mt-4 mt-md-0">
             <Input type="select" className="custom-select">
@@ -79,12 +79,10 @@ const SalesOverview = () => {
       </CardBody>
       <CardBody className="bg-light d-flex align-items-center justify-content-between">
         <div>
-          <h3>March 2022</h3>
+          <h3>February 2025</h3>
           <h5 className="fw-light mb-0 text-muted">Report for this month</h5>
         </div>
-        <div className="mt-4 mt-md-0">
-          <h2 className="text-success mb-0">$3,690</h2>
-        </div>
+   
       </CardBody>
       <div className="table-responsive">
         <Table className="text-nowrap align-middle mb-0" hover>
@@ -93,8 +91,7 @@ const SalesOverview = () => {
               <th>#</th>
               <th>Name</th>
               <th>Status</th>
-              <th>Date</th>
-              <th>Price</th>
+              <th>Total Clients</th>
             </tr>
           </thead>
           <tbody>
@@ -118,7 +115,6 @@ const SalesOverview = () => {
                   )}
                 </td>
                 <td>{tdata.date}</td>
-                <td>{tdata.price}</td>
               </tr>
             ))}
           </tbody>

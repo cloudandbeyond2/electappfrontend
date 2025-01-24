@@ -2,22 +2,16 @@ import React from 'react';
 import {
   Button,
   Nav,
-  UncontrolledDropdown,
-  DropdownItem,
-  DropdownToggle,
-  DropdownMenu,
 } from 'reactstrap';
-import { User, FileText, Star, Settings, Droplet } from 'react-feather';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import SimpleBar from 'simplebar-react';
 import SidebarData from '../sidebardata/SidebarData';
-import Logo from '../../logo/Logo';
 import { ToggleMobileSidebar } from '../../../store/customizer/CustomizerSlice';
 import NavItemContainer from './NavItemContainer';
 import NavSubMenu from './NavSubMenu';
 
-import user1 from '../../../assets/images/users/user4.jpg';
+import AuthLogo from '../../logo/AuthLogo';
 
 const Sidebar = () => {
   const location = useLocation();
@@ -37,7 +31,7 @@ const Sidebar = () => {
       <SimpleBar style={{ height: '100%' }}>
         {/********Logo*******/}
         <div className="d-flex p-3 align-items-center">
-          <Logo />
+          <AuthLogo />
           <Button
             close
             size="sm"
@@ -46,37 +40,7 @@ const Sidebar = () => {
           />
         </div>
         {/********Sidebar Content*******/}
-        <div className="py-4 text-center profile-area">
-          <img src={user1} alt="John Deo" width={60} className="rounded-circle mb-2" />
-          <UncontrolledDropdown>
-            <DropdownToggle caret className="bg-transparent border-0">
-              John Deo
-            </DropdownToggle>
-            <DropdownMenu className='w-100 border'>
-              <DropdownItem className="px-4 py-3">
-                <User size={20} className="text-muted" />
-                &nbsp; My Profile
-              </DropdownItem>
-              <DropdownItem className="px-4 py-3">
-                <FileText size={20} className="text-muted" />
-                &nbsp; Edit Profile
-              </DropdownItem>
-              <DropdownItem className="px-4 py-3">
-                <Star size={20} className="text-muted" />
-                &nbsp; My Balance
-              </DropdownItem>
-              <DropdownItem className="px-4 py-3">
-                <Droplet size={20} className="text-muted" />
-                &nbsp; Customize
-              </DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem className="px-4 py-3">
-                <Settings size={20} className="text-muted" />
-                &nbsp; Settings
-              </DropdownItem>
-            </DropdownMenu>
-          </UncontrolledDropdown>
-        </div>
+      
         <div>
           <Nav vertical className={activeBg === 'white' ? '' : 'lightText'}>
             {SidebarData.map((navi) => {

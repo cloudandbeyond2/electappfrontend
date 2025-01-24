@@ -1,26 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col } from 'reactstrap';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
-import axios from 'axios'; // For fetching data
+import axios from 'axios';
 import './ReactBootstrapTable.scss';
 import ComponentCard from '../../components/ComponentCard';
-
-// This is for the Search item
-function afterSearch(searchText, result) {
-  console.log(`Your search text is ${searchText}`);
-  console.log('Result is:');
-  for (let i = 0; i < result.length; i++) {
-    console.log(`Agent: ${result[i].firstName}, ${result[i].lastName}, ${result[i].gender}`);
-  }
-}
-
-const options = {
-  afterSearch, // define a after search hook
-};
-
-const selectRowProp = {
-  mode: 'checkbox',
-};
 
 const Datatables = () => {
   const [agents, setAgents] = useState([]);
@@ -29,24 +12,73 @@ const Datatables = () => {
     const fetchAgents = async () => {
       try {
         const response = await axios.get('https://agentsapp.vercel.app/api/agents');
-        // Log the data structure for debugging
-        console.log(response.data); // Verify that the address field exists
-
-        // Map the data if needed
-        const agentsWithDefaults = response.data.map(agent => ({
+        const agentsWithConstituency = response.data.map(agent => ({
           ...agent,
-          wardNumber: agent.address?.wardNumber || '', // Safely extract wardNumber
-          constituency: agent.address?.constituency || '', // Safely extract constituency
+          constituency: agent.address?.constituency || 'N/A',
+          wardNumber: agent.address?.wardNumber || 'N/A',
         }));
-
-        setAgents(agentsWithDefaults);
+        setAgents(agentsWithConstituency);
       } catch (error) {
         console.error('Error fetching agents:', error);
       }
     };
-
     fetchAgents();
   }, []);
+
+  // Utility function to trigger file download
+  const triggerDownload = (fileUrl, fileName) => {
+    const link = document.createElement('a');
+    link.href = fileUrl;
+    link.setAttribute('download', fileName); // Ensures the file is downloaded
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  // Render download button for Aadhar
+  const renderAadharDownload = (cell, row) => (
+    row.aadharFilePath ? (
+      <button
+        type="button"
+        className="btn btn-link"
+        onClick={() => triggerDownload(row.aadharFilePath, 'Aadhar.pdf')}
+      >
+        📄
+      </button>
+    ) : (
+      'N/A'
+    )
+  );
+
+  // Render download button for PAN
+  const renderPANDownload = (cell, row) => (
+    row.panFilePath ? (
+      <button
+        type="button"
+        className="btn btn-link"
+        onClick={() => triggerDownload(row.panFilePath, 'PAN.pdf')}
+      >
+        📄
+      </button>
+    ) : (
+      'N/A'
+    )
+  );
+
+  // Render download button for Voter ID
+  const renderVoterIdDownload = (cell, row) => (
+    row.voterIdFilePath ? (
+      <button
+        type="button"
+        className="btn btn-link"
+        onClick={() => triggerDownload(row.voterIdFilePath, 'VoterID.pdf')}
+      >
+        📄
+      </button>
+    ) : (
+      'N/A'
+    )
+  );
 
   return (
     <div>
@@ -58,28 +90,68 @@ const Datatables = () => {
               hover
               condensed
               search
-              data={agents} // Pass the updated agents data with proper fields
+              data={agents}
               deleteRow
-              selectRow={selectRowProp}
               pagination
-              options={options}
               tableHeaderClass="mb-0"
-              tableStyle={{ tableLayout: 'fixed' }} // Add this to ensure fixed table layout
+              tableStyle={{ tableLayout: 'fixed' }}
             >
-              <TableHeaderColumn width="100" dataField="firstName" isKey>
+              <TableHeaderColumn
+                width="100"
+                dataField="firstName"
+                isKey
+                filter={{ type: 'TextFilter', delay: 1000 }}
+              >
                 First Name
               </TableHeaderColumn>
-              <TableHeaderColumn width="100" dataField="lastName">
+              <TableHeaderColumn
+                width="100"
+                dataField="lastName"
+                filter={{ type: 'TextFilter', delay: 1000 }}
+              >
                 Last Name
               </TableHeaderColumn>
-              <TableHeaderColumn width="100" dataField="gender">
+              <TableHeaderColumn
+                width="100"
+                dataField="gender"
+                filter={{ type: 'TextFilter', delay: 1000 }}
+              >
                 Gender
               </TableHeaderColumn>
-              <TableHeaderColumn width="100" dataField="constituency">
+              <TableHeaderColumn
+                width="100"
+                dataField="constituency"
+                filter={{ type: 'TextFilter', delay: 1000 }}
+              >
                 Constituency
               </TableHeaderColumn>
-              <TableHeaderColumn width="100" dataField="wardNumber">
+              <TableHeaderColumn
+                width="100"
+                dataField="wardNumber"
+                filter={{ type: 'TextFilter', delay: 1000 }}
+              >
                 Ward Number
+              </TableHeaderColumn>
+              <TableHeaderColumn
+                width="100"
+                dataField="aadhar"
+                dataFormat={renderAadharDownload}
+              >
+                Aadhar
+              </TableHeaderColumn>
+              <TableHeaderColumn
+                width="100"
+                dataField="pan"
+                dataFormat={renderPANDownload}
+              >
+                PAN
+              </TableHeaderColumn>
+              <TableHeaderColumn
+                width="100"
+                dataField="voterId"
+                dataFormat={renderVoterIdDownload}
+              >
+                Voter ID
               </TableHeaderColumn>
             </BootstrapTable>
           </ComponentCard>

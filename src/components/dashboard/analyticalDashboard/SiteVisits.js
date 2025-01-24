@@ -6,7 +6,7 @@ import DashCard from '../dashboardCards/DashCard';
 
 const SiteVisits = () => {
   return (
-    <DashCard title="Site Visits">
+    <DashCard title="World Wide Agents">
       <Row>
         <Col lg="8">
           <VectorMap
@@ -63,7 +63,7 @@ const SiteVisits = () => {
                 <h6 className="mb-0 fw-medium">From India</h6>
                 <span className="text-muted">48%</span>
               </div>
-              <h2 className="ms-auto text-end">6350</h2>
+              <h2 className="ms-auto text-end">26350</h2>
             </div>
             <Progress value="48" color="info" />
           </div>
@@ -71,11 +71,11 @@ const SiteVisits = () => {
             <div className="d-flex align-items-center gap-3 justify-content-between">
               <div>
                 <h6 className="mb-0 fw-medium">From Russia</h6>
-                <span className="text-muted">98%</span>
+                <span className="text-muted">12%</span>
               </div>
               <h2 className="ms-auto text-end">9654</h2>
             </div>
-            <Progress value="98" color="primary" />
+            <Progress value="12" color="primary" />
           </div>
           <div className="mb-4">
             <div className="d-flex align-items-center gap-3 justify-content-between">
@@ -83,7 +83,7 @@ const SiteVisits = () => {
                 <h6 className="mb-0 fw-medium">From United States</h6>
                 <span className="text-muted">25%</span>
               </div>
-              <h2 className="ms-auto text-end">4582</h2>
+              <h2 className="ms-auto text-end">14582</h2>
             </div>
             <Progress value="25" color="warning" />
           </div>
@@ -91,21 +91,21 @@ const SiteVisits = () => {
             <div className="d-flex align-items-center gap-3 justify-content-between">
               <div>
                 <h6 className="mb-0 fw-medium">From Autralia</h6>
-                <span className="text-muted">87%</span>
+                <span className="text-muted">5%</span>
               </div>
               <h2 className="ms-auto text-end">7530</h2>
             </div>
-            <Progress value="87" color="danger" />
+            <Progress value="5" color="danger" />
           </div>
           <div className="mb-4">
             <div className="d-flex align-items-center gap-3 justify-content-between">
               <div>
                 <h6 className="mb-0 fw-medium">From France</h6>
-                <span className="text-muted">65%</span>
+                <span className="text-muted">8%</span>
               </div>
               <h2 className="ms-auto text-end">6320</h2>
             </div>
-            <Progress value="65" color="success" />
+            <Progress value="8" color="success" />
           </div>
         </Col>
       </Row>

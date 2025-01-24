@@ -3,7 +3,7 @@ import * as Icon from 'react-feather';
 const SidebarData = [
   {
     title: 'Dashboards',
-    href: '/dashboards/modern',
+    href: '/dashboards/minimal',
     id: 1,
     suffixColor: 'bg-cyan rounded-pill text-dark-white',
     icon: <Icon.Home />,
