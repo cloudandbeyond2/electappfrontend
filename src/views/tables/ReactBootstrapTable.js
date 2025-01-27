@@ -26,22 +26,23 @@ const Datatables = () => {
   }, []);
 
   // Utility function to trigger file download
-  const triggerDownload = (fileUrl, fileName) => {
+  const triggerDownload = (fileUrl) => {
     const link = document.createElement('a');
     link.href = fileUrl;
-    link.setAttribute('download', fileName); // Ensures the file is downloaded
+    link.setAttribute('target', '_blank'); // Opens the link in a new tab
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
+  
+  
 
-  // Render download button for Aadhar
   const renderAadharDownload = (cell, row) => (
     row.aadharFilePath ? (
       <button
         type="button"
         className="btn btn-link"
-        onClick={() => triggerDownload(row.aadharFilePath, 'Aadhar.pdf')}
+        onClick={() => triggerDownload(row.aadharFilePath)}
       >
         📄
       </button>
@@ -49,14 +50,13 @@ const Datatables = () => {
       'N/A'
     )
   );
-
-  // Render download button for PAN
+  
   const renderPANDownload = (cell, row) => (
     row.panFilePath ? (
       <button
         type="button"
         className="btn btn-link"
-        onClick={() => triggerDownload(row.panFilePath, 'PAN.pdf')}
+        onClick={() => triggerDownload(row.panFilePath)}
       >
         📄
       </button>
@@ -64,14 +64,13 @@ const Datatables = () => {
       'N/A'
     )
   );
-
-  // Render download button for Voter ID
+  
   const renderVoterIdDownload = (cell, row) => (
     row.voterIdFilePath ? (
       <button
         type="button"
         className="btn btn-link"
-        onClick={() => triggerDownload(row.voterIdFilePath, 'VoterID.pdf')}
+        onClick={() => triggerDownload(row.voterIdFilePath)}
       >
         📄
       </button>
@@ -79,6 +78,7 @@ const Datatables = () => {
       'N/A'
     )
   );
+  
 
   return (
     <div>
