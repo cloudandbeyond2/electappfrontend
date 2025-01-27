@@ -1,11 +1,14 @@
 import React from 'react';
+import axios from 'axios';
 import { Button, Label, FormGroup, Container, Row, Col, Card, CardBody, Input } from 'reactstrap';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import Swal from 'sweetalert2';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthLogo from "../../layouts/logo/AuthLogo";
 import { ReactComponent as LeftBg } from '../../assets/images/bg/login-bgleft.svg';
 import { ReactComponent as RightBg } from '../../assets/images/bg/login-bg-right.svg';
+
 
 const LoginFormik = () => {
   const navigate = useNavigate();
@@ -18,9 +21,25 @@ const LoginFormik = () => {
   const validationSchema = Yup.object().shape({
     email: Yup.string().email('Email is invalid').required('Email is required'),
     password: Yup.string()
-      .min(6, 'Password must be at least 6 characters')
+      .min(2, 'Password must be at least 2 characters')
       .required('Password is required'),
   });
+
+  const handleLogin = async (values) => {
+    try {
+      const response = await axios.post('http://localhost:5000/api/addUsers/login', values);
+      if (response.status === 200) {
+        // On successful login, redirect to dashboard
+        navigate('/dashboards/minimal');
+      }
+    } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: error.response.data.message,
+        });
+    }
+  };
 
   return (
     <div className="loginBox">
@@ -39,12 +58,9 @@ const LoginFormik = () => {
                 <Formik
                   initialValues={initialValues}
                   validationSchema={validationSchema}
-                  onSubmit={(fields) => {
-                    // eslint-disable-next-line no-alert
-                    alert(`SUCCESS!! :-)\n\n${JSON.stringify(fields, null, 4)}`);
-                    navigate('/');
-                  }}
-                  render={({ errors, touched }) => (
+                  onSubmit={handleLogin}
+                >
+                  {({ errors, touched }) => (
                     <Form>
                       <FormGroup>
                         <Label htmlFor="email">Email</Label>
@@ -88,7 +104,7 @@ const LoginFormik = () => {
                       </FormGroup>
                     </Form>
                   )}
-                />
+                </Formik>
               </CardBody>
             </Card>
           </Col>
