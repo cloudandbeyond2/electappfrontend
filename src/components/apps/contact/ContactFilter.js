@@ -30,7 +30,7 @@ const ContactFilter = () => {
         >
           <i className="bi bi-people mx-1" /> All
         </ListGroupItem>
-        <ListGroupItem
+        {/* <ListGroupItem
           href="#"
           tag="a"
           className={active === 'frequent_contact' ? 'bg-light py-3 border-0' : 'py-3 border-0'}
@@ -73,7 +73,7 @@ const ContactFilter = () => {
           onClick={() => dispatch(setVisibilityFilter('sales_department'))}
         >
           <i className="bi bi-bookmark-star mx-1" /> Sales
-        </ListGroupItem>
+        </ListGroupItem> */}
       </ListGroup>
       {/***********Contact Add Box**************/}
       <Modal isOpen={modal} toggle={toggle} size="md">
