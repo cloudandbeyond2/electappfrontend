@@ -4,9 +4,9 @@ import { Card, CardBody } from 'reactstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { DeleteContact, toggleStarredContact } from '../../../store/apps/contacts/ContactSlice';
 import ThreeColumn from '../../../components/threeColumn/ThreeColumn';
-import ContactFilter from '../../../components/apps/contact/ContactFilter';
 import AgentList from './AgentList';
 import AgentDetails from './AgentDetails';
+import AgentFilter from './AgentFilter';
 
 const Contacts = () => {
   const [agents, setAgents] = useState([]);
@@ -48,7 +48,7 @@ const Contacts = () => {
     <Card>
       <CardBody>
         <ThreeColumn
-          leftContent={<ContactFilter />}
+          leftContent={<AgentFilter />}
           middleContent={
             <AgentList
               agents={agents}

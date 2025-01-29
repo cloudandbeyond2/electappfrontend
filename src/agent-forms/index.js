@@ -17,7 +17,7 @@ import {
 } from 'reactstrap';
 import AuthLogo from '../layouts/logo/AuthLogo';
 
-const FormAgent = () => {
+const FormAgent = () => { 
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
