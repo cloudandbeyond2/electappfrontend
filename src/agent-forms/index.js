@@ -30,6 +30,7 @@ const FormAgent = () => {
       wardNumber: '',
       constituency: '',
       city: '',
+      district:'',
       state: '',
       postCode: '',
       country: '',
@@ -274,6 +275,18 @@ const FormAgent = () => {
                           name="address.city"
                           placeholder="City"
                           value={formData.address.city}
+                          onChange={handleInputChange}
+                        />
+                      </FormGroup>
+                    </Col>
+                     <Col md="6">
+                      <FormGroup>
+                        <Label>District</Label>
+                        <Input
+                          type="text"
+                          name="address.district"
+                          placeholder="District"
+                          value={formData.address.district}
                           onChange={handleInputChange}
                         />
                       </FormGroup>
