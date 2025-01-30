@@ -46,6 +46,43 @@ const Datatables = () => {
       'N/A'
     )
   );
+  const handleApproval = async (agentId) => {
+    try {
+      console.log(agentId, "agentId");
+  
+      // Send API request to update approval status
+      await axios.put(`https://agentsapp.vercel.app/api/agents/${agentId}`, 
+        { status: "Approved" },  // Send updated data in request body
+        { headers: { 'Content-Type': 'application/json' } } // Move headers to config
+      );
+  
+      // Update UI state
+      setAgents((prevAgents) =>
+        prevAgents.map((agent) =>
+          agent._id === agentId ? { ...agent, status: "Approved" } : agent
+        )
+      );
+  
+      alert('Agent approved successfully!');
+    } catch (error) {
+      console.error('Error approving agent:', error);
+      alert('Failed to approve agent.');
+    }
+  };
+  const renderApprovalButton = (cell, row) => (
+    
+    <button
+      type="button"
+      className="btn btn-success btn-sm"
+      onClick={() => handleApproval(row._id)}
+      disabled={row.status ? 'Approved' : ''}
+    >
+      {row.status ? 'Approved' : 'Approve'}
+    </button>
+  );
+  
+  
+  // Render approval button
 
   return (
     <div>
@@ -86,6 +123,9 @@ const Datatables = () => {
               </TableHeaderColumn>
               <TableHeaderColumn width="100" dataField="voterId" dataFormat={(cell, row) => renderFileViewerButton(row.voterIdFilePath)}>
                 Voter ID
+              </TableHeaderColumn>
+              <TableHeaderColumn width="100" dataField="approval" dataFormat={renderApprovalButton}> 
+                Approval
               </TableHeaderColumn>
             </BootstrapTable>
           </ComponentCard>
