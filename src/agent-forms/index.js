@@ -17,7 +17,7 @@ import {
 } from 'reactstrap';
 import AuthLogo from '../layouts/logo/AuthLogo';
 
-const FormAgent = () => { 
+const FormAgent = () => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -41,7 +41,24 @@ const FormAgent = () => {
       voterId: null,
     },
   });
-
+  const stateDistricts = {
+    Tamilnadu: [
+        'Ariyalur', 'Chengalpattu', 'Chennai', 'Coimbatore', 'Cuddalore', 'Dharmapuri', 'Dindigul', 'Erode', 'Kallakurichi', 'Kancheepuram', 'Karur', 
+        'Krishnagiri', 'Madurai', 'Mayiladuthurai', 'Nagapattinam', 'Kanyakumari', 'Namakkal', 'Nilgiris', 'Perambalur', 'Pudukkottai', 'Ramanathapuram',
+        'Ranipet', 'Salem', 'Sivaganga', 'Tenkasi', 'Thanjavur', 'Theni', 'Thoothukudi', 'Tiruchirappalli', 'Tirunelveli', 'Tirupattur', 'Tiruppur',
+        'Tiruvallur', 'Tiruvannamalai', 'Tiruvarur', 'Vellore', 'Viluppuram', 'Virudhunagar'
+    ],
+    Kerala: [
+        'Alappuzha', 'Ernakulam', 'Idukki', 'Kannur', 'Kasaragod', 'Kollam', 'Kottayam', 'Kozhikode', 'Malappuram', 'Palakkad', 'Pathanamthitta', 'Thrissur',
+        'Thiruvananthapuram', 'Wayanad'
+    ],
+    AndraPradesh: [
+        'Anakapalli', 'Anantapur', 'Annamayya', 'Bapatla', 'Chittoor', 'Dr. B.R. Ambedkar Konaseema', 'East Godavari', 'Eluru', 'Guntur', 'Kadapa', 'Kakinada',
+        'Krishna', 'Kurnool', 'Nandyal', 'Nellore', 'NTR', 'Palnadu', 'Parvathipuram Manyam', 'Prakasam', 'Srikakulam', 'Tirupati', 'Visakhapatnam',
+        'Vizianagaram', 'West Godavari', 'YSR Kadapa'
+    ]
+};
+  
   // Handle input change for text fields
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -279,30 +296,46 @@ const FormAgent = () => {
                         />
                       </FormGroup>
                     </Col>
-                     <Col md="6">
-                      <FormGroup>
-                        <Label>District</Label>
-                        <Input
-                          type="text"
-                          name="address.district"
-                          placeholder="District"
-                          value={formData.address.district}
-                          onChange={handleInputChange}
-                        />
-                      </FormGroup>
-                    </Col>
                     <Col md="6">
-                      <FormGroup>
-                        <Label>State</Label>
-                        <Input
-                          type="text"
-                          name="address.state"
-                          placeholder="State"
-                          value={formData.address.state}
-                          onChange={handleInputChange}
-                        />
-                      </FormGroup>
-                    </Col>
+        <FormGroup>
+          <Label>State</Label>
+          <Input
+            type="select"
+            name="address.state"
+            value={formData.address.state}
+            onChange={handleInputChange}
+          >
+            <option value="">--Select State--</option>
+            {Object.keys(stateDistricts).map((state) => (
+              <option key={state} value={state}>
+                {state}
+              </option>
+            ))}
+          </Input>
+        </FormGroup>
+      </Col>
+
+      <Col md="6">
+        <FormGroup>
+          <Label>District</Label>
+          <Input
+            type="select"
+            name="address.district"
+            value={formData.address.district}
+            onChange={handleInputChange}
+            disabled={!formData.address.state} // Disable if state not selected
+          >
+            <option value="">--Select District--</option>
+            {formData.address.state &&
+              stateDistricts[formData.address.state].map((district) => (
+                <option key={district} value={district}>
+                  {district}
+                </option>
+              ))}
+          </Input>
+        </FormGroup>
+      </Col>
+                    
                     <Col md="6">
                       <FormGroup>
                         <Label>Post Code</Label>
